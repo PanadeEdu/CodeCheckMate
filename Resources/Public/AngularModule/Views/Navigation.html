@@ -1,0 +1,5 @@
+<ul class="nav navbar-nav">
+    <li ng-repeat="route in routes" ng-class="{active: activeRoute(route)}">
+        <a href="#{{ route.path }}">{{ route.name }}</a>
+    </li>
+</ul>

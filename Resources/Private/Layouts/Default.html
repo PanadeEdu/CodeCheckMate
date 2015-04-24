@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="CodeCheckMate">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="Application Code CheckMate for Code Checking">
+        <meta name="author" content="Florian Tatzel">
+
+        <title>Code CheckMate</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="{f:uri.resource(path: 'bower_components/bootstrap/dist/css/bootstrap.min.css')}" rel="stylesheet">
+        <link href="{f:uri.resource(path: 'Css/CodeCheckMate.css')}" rel="stylesheet">
+
+        <!-- Libs JS -->
+        <script src="{f:uri.resource(path: 'bower_components/jquery/dist/jquery.min.js')}"></script>
+        <script src="{f:uri.resource(path: 'bower_components/bootstrap/dist/js/bootstrap.min.js')}"></script>
+        <script src="{f:uri.resource(path: 'bower_components/angular/angular.min.js')}"></script>
+        <script src="{f:uri.resource(path: 'bower_components/angular-animate/angular-animate.min.js')}"></script>
+        <script src="{f:uri.resource(path: 'bower_components/angular-route/angular-route.min.js')}"></script>
+
+        <!-- Angular Application -->
+        <script src="{f:uri.resource(path: 'AngularModule/app/CodeCheckMateApp.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/services/RouteNavigationFactory.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/directives/NavigationDirective.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/controller/MainController.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/controller/ConfigurationController.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/controller/CommandConfigController.js')}"></script>
+        <script src="{f:uri.resource(path: 'AngularModule/app/controller/PresetConfigController.js')}"></script>
+    </head>
+
+    <body ng-controller="MainController">
+            <f:flashMessages class="flashmessages" />
+            <f:render section="Content" />
+    </body>
+</html>

@@ -1,0 +1,129 @@
+<div class="container" ng-controller="PresetConfigController">
+
+        <!--
+     ################
+     # Page Content #
+     ################
+     -->
+    <h1>Preset List</h1>
+    <div class="pull-right">
+        <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-plus add-preset" ng-click="addButton()"></button>
+    </div>
+    <table class="table table-striped-skipone">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Descripton</th>
+            <!--<th>Description</th>-->
+            <th class="text-right">Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat-start="(presetKey, preset) in PresetList" ng-show="PresetListCount > 0" data-toggle="collapse" data-target="#presetMore-{{$index}}" aria-expanded="false" aria-controls="presetMore-{{$index}}">
+            <td class="col-md-3">{{ preset.name }}</td>
+            <td class="col-md-6">{{ preset.description }}</td>
+            <!--<td class="col-md-4">{{ preset.description }}</td>-->
+            <td class="col-md-1 text-right">
+                <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-pencil edit" data-preset-id="{{presetKey}}" ng-click="editButton(presetKey)"></button>
+                <button type="button" class="btn btn-danger btn-xs glyphicon glyphicon-minus delete" data-preset-id="{{presetKey}}" ng-click="removeButton(presetKey)"></button>
+            </td>
+        </tr>
+        <tr ng-repeat-end id="presetMore-{{$index}}" class="collapse table-inherit-stripe">
+            <td colspan="2">
+                <div>
+                    <strong>Preset Path: </strong><p>{{ preset.path }}</p>
+                </div>
+                <div>
+                    <strong>Commands: </strong>
+                    <p>{{ preset.commands }}</p>
+                </div>
+            </td>
+            <!--<td class="">{{ preset.description }}</td>-->
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+    <p ng-show="!PresetListCount">No Presets defined!</p>
+    <div class="pull-right">
+        <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-plus add-preset" ng-click="addButton()"></button>
+    </div>
+
+
+    <!--
+     ##############
+     # Form Modal #
+     ##############
+     -->
+    <div class="modal fade" id="presetForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{presetFormModalConfig.PresetFormTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <form name="presetData" id="presetData">
+                        <div class="form-group">
+                            <label for="form-preset-name">Preset Name</label>
+                            <input type="text" class="form-control" id="form-preset-name" name="formPresetName" ng-model="formPreset.name" placeholder="My Preset">
+                        </div>
+                        <div class="form-group">
+                            <label for="form-preset-path">Preset Path</label>
+                            <input type="text" class="form-control" id="form-preset-path" name="formPresetPath" ng-model="formPreset.path" placeholder="mypreset -v [path]">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="" data-toggle="collapse" data-target="#configuredPresetCommands" aria-expanded="true" aria-controls="configuredPresetCommands">
+                                <p>Configured Commands</p>
+                            </div>
+                            <div class="collapse in" id="configuredPresetCommands">
+                                <span ng-repeat="configuredCommand in presetCommandsSubset.PresetConfiguredCommands track by $index" class="btn-group btn-group-xs presetCommandList" role="group">
+                                    <button class="btn btn-default disabled">{{configuredCommand.name}}</button>
+                                    <button class="btn btn-danger glypthicon glyphicon-minus" ng-click="removePresetCommand($index)"></button>
+                                </span>
+                            </div>
+                            <label for="form-preset-commands">Preset Commands</label>
+                            <select class="form-control" id="form-preset-commands" name="formPresetCommands" ng-model="presetCommandsSubset.PresetCommandsSelection" ng-options="command.name for command in CommandList">
+                            </select>
+                            <button type="button" class="btn btn-success btn-xs glyphicon glyphicon-plus pull-right" ng-click="addPresetCommand()"></button>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="form-preset-description">Preset Description</label>
+                            <textarea class="form-control" rows="3" id="form-preset-description" name="formPresetDescription" ng-model="formPreset.description" placeholder="This Preset executed Command1, Command2 and Command3 to fully check all my Code in [PATH]"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="{{presetFormModalConfig.PresetFormSendId}}" ng-click="presetFormModalConfig.PresetFunction()">{{presetFormModalConfig.PresetFormSendLabel}}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!--
+     #################
+     # Confirm Modal #
+     #################
+     -->
+    <div class="modal fade" id="presetConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">{{presetConfirmModalConfig.PresetConfirmTitle}}</h4>
+                </div>
+                <div class="modal-body">
+                    <p>{{presetConfirmModalConfig.PresetConfirmText}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Abort</button>
+                    <button type="button" class="btn btn-primary" id="{{presetConfirmModalConfig.PresetConfirmSendId}}" ng-click="removePreset()">{{presetConfirmModalConfig.PresetConfirmSendLabel}}</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+</div>

@@ -1,0 +1,13 @@
+-
+  name: 'Web Interface'
+  uriPattern: ''
+  defaults:
+    '@package': 'PanadeEdu.CodeCheckMate'
+    '@controller': 'Standard'
+    '@action': 'index'
+-
+  name: 'List Commands'
+  uriPattern: 'command/{@action}'
+  defaults:
+    '@package': 'PanadeEdu.CodeCheckMate'
+    '@controller': 'Command'

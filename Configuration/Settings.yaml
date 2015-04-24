@@ -1,0 +1,12 @@
+PanadeEdu:
+  CodeCheckMate:
+
+    # Configurations for File System Storages of Domain Objects
+    repository:
+
+      commandRepository:
+        filePath: 'Configuration/CheckMate/Commands.yaml'
+      presetRepository:
+        filePath: 'Configuration/CheckMate/Presets.yaml'
+      resultRepository:
+        filePath: 'Configuration/CheckMate/Results.yaml'

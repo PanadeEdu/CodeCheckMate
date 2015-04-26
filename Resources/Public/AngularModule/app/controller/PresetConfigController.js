@@ -71,7 +71,7 @@ codeCheckMateApp.controller('PresetConfigController', function ($scope, $http) {
      */
     $scope.getPresetList = function () {
         $scope.cleanData();
-        $http.get('index.php/PanadeEdu.CodeCheckMate/Preset/list')
+        $http.get('index.php/PanadeEdu.CodeCheckMate/Preset')
             .success(function (response) {
 
                 $scope.PresetList = {};

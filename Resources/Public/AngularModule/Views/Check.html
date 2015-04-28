@@ -1,6 +1,48 @@
-<ul>
-    <li ng-repeat="sniff in Sniffer">
-        <span>{{ sniff.name }}</span>
-        <p>{{ sniff.comand }}</p>
-    </li>
-</ul>
+<div class="container" ng-controller="CheckController">
+
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-10">
+
+
+            <h1>Execute Presets</h1>
+            <table class="table table-striped-skipone">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Descripton</th>
+                    <!--<th>Description</th>-->
+                    <th class="text-right">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat-start="(presetKey, preset) in PresetList" ng-show="PresetListCount > 0" data-toggle="collapse" data-target="#presetMore-{{$index}}" aria-expanded="false" aria-controls="presetMore-{{$index}}">
+                    <td class="col-md-3">{{ preset.name }}</td>
+                    <td class="col-md-6">{{ preset.description }}</td>
+                    <!--<td class="col-md-4">{{ preset.description }}</td>-->
+                    <td class="col-md-1 text-right">
+                        <button type="button" class="btn btn-info btn-xs glyphicon glyphicon-play" data-preset-id="{{presetKey}}" ng-click="executePreset(presetKey)"></button>
+                    </td>
+                </tr>
+                <tr ng-repeat-end id="presetMore-{{$index}}" class="collapse table-inherit-stripe">
+                    <td colspan="2">
+                        <div>
+                            <strong>Preset Path: </strong><p>{{ preset.path }}</p>
+                        </div>
+                        <div>
+                            <strong>Commands: </strong>
+                            <p>{{ preset.commands }}</p>
+                        </div>
+                    </td>
+                    <!--<td class="">{{ preset.description }}</td>-->
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>

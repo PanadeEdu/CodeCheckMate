@@ -2,9 +2,20 @@
 
     <div class="row">
         <div class="col-md-2">
-            <subnavigation></subnavigation>
+            <!-- <subnavigation></subnavigation> -->
+            <div class="subnavigation">
+                <ul class="green nav nav-pills nav-stacked">
+                    <li ng-class="{active: $state.includes('config.command')}">
+                        <a ui-sref="config.command">Commands</a>
+                    </li>
+                    <li ng-class="{active: $state.includes('config.preset')}">
+                        <a ui-sref="config.preset">Presets</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-md-10">
+            <div ui-view></div>
             <!--<div data-ng-view class="ngview" autoscroll="true"></div>-->
         </div>
     </div>

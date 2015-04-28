@@ -3,9 +3,14 @@ codeCheckMateApp.directive('navigation', function (routeNavigation) {
         restrict: "E",
         replace: true,
         templateUrl: $templateRoot + "Navigation.html",
-        controller: function ($scope) {
-            $scope.routes = routeNavigation.routes;
-            $scope.activeRoute = routeNavigation.activeRoute;
+        controller: function ($rootScope) {
+            console.log('aaaaaaaa');
+            console.log($rootScope);
+
+            $rootScope.routes = routeNavigation.routes;
+            $rootScope.activeRoute = routeNavigation.activeRoute;
+            console.log($rootScope.routes);
+            console.log($rootScope.activeRoute);
         }
     };
 });

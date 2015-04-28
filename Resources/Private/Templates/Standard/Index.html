@@ -13,7 +13,18 @@
                 <a href="#/check" class="navbar-brand"> Code CheckMate</a>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
-                <navigation></navigation>
+                <ul class="nav navbar-nav">
+                    <li ng-class="{active: $state.includes('check')}">
+                        <a ui-sref="check"><span class="glyphicon glyphicon-check"></span> Check</a>
+                    </li>
+                    <li ng-class="{active: $state.includes('history')}">
+                        <a ui-sref="history"><span class="glyphicon glyphicon-book"></span> History</a>
+                    </li>
+                    <li ng-class="{active: $state.includes('config')}">
+                        <a ui-sref="config"><span class="glyphicon glyphicon-pencil"></span> Config</a>
+                    </li>
+                </ul>
+               <!-- <navigation></navigation> -->
             </div><!--/.nav-collapse -->
         </div>
     </nav>
@@ -21,7 +32,7 @@
     <div class="container main-content">
 
         <!-- <f:debug>{valueTest}</f:debug> -->
-
-        <div data-ng-view class="ngview" autoscroll="true"></div>
+        <div ui-view></div>
+        <!-- <div data-ng-view class="ngview" autoscroll="true"></div> -->
     </div><!-- /.container -->
 </f:section>

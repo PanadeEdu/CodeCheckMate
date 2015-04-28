@@ -82,7 +82,7 @@ codeCheckMateApp.controller('CommandConfigController', function ($scope, $http) 
             $http({
                 method: 'POST',
                 url: 'index.php/PanadeEdu.CodeCheckMate/Command/create',
-                data: cmdAddData,
+                data: {cmdData: cmdAddData},
                 headers: {'Content-Type': 'application/json'}
             }).success(function (response) {
                 if (response) {
@@ -122,7 +122,7 @@ codeCheckMateApp.controller('CommandConfigController', function ($scope, $http) 
             $http({
                 method: 'POST',
                 url: 'index.php/PanadeEdu.CodeCheckMate/Command/delete',
-                data: {'cmdKey': $scope.CommandOriginKey},
+                data: {'cmdData': $scope.CommandOriginKey},
                 headers: {'Content-Type': 'application/json'}
             }).success(function (response) {
                 if (response) {
@@ -169,7 +169,7 @@ codeCheckMateApp.controller('CommandConfigController', function ($scope, $http) 
             $http({
                 method: 'POST',
                 url: 'index.php/PanadeEdu.CodeCheckMate/Command/update',
-                data: cmdEditData,
+                data: {cmdData: cmdEditData},
                 headers: {'Content-Type': 'application/json'}
             }).success(function (response) {
                 if (response) {

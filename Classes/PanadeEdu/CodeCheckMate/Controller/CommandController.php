@@ -7,7 +7,6 @@ namespace PanadeEdu\CodeCheckMate\Controller;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Mvc\Controller\RestController as RestController;
 
 use PanadeEdu\CodeCheckMate\Domain\Model\Command as CheckCommand;
 
@@ -15,7 +14,7 @@ use PanadeEdu\CodeCheckMate\Domain\Model\Command as CheckCommand;
  * Class CommandController
  * @package PanadeEdu\CodeCheckMate\Controller
  */
-class CommandController extends RestController {
+class CommandController extends AbstractRestController {
 
     /**
      * @var \PanadeEdu\CodeCheckMate\Domain\Repository\CommandRepository
@@ -30,7 +29,7 @@ class CommandController extends RestController {
     /**
      * @var string
      */
-    protected $resourceArgumentName = 'cmdAddData';
+    protected $resourceArgumentName = 'cmdData';
 
     /**
      * @return void
@@ -42,38 +41,35 @@ class CommandController extends RestController {
     }
 
     /**
-     * @param mixed $cmdAddData
+     * @param Array $cmdData
      * @return boolean
      */
-    public function createAction($cmdAddData = NULL) {
-        $formData = $this->request->getArguments();
+    public function createAction($cmdData) {
         $newCommand = new CheckCommand();
-        $newCommand->setShortName($formData['shortname'])
-            ->setName($formData['name'])
-            ->setDescription($formData['description'])
-            ->setSyntax($formData['syntax'])
+        $newCommand->setShortName($cmdData['shortname'])
+            ->setName($cmdData['name'])
+            ->setDescription($cmdData['description'])
+            ->setSyntax($cmdData['syntax'])
             ->setConfiguration();
         $this->commandRepository->add($newCommand->getConfiguration());
         return 'true';
     }
 
     /**
-     * @param string $cmdKey
+     * @param String $cmdData
      * @return boolean
      */
-    public function deleteAction($cmdKey = NULL) {
-        $cmdKey = $this->request->getArguments();
-        $this->commandRepository->remove($cmdKey['cmdKey']);
+    public function deleteAction($cmdData) {
+        $this->commandRepository->remove($cmdData);
         return 'true';
     }
 
     /**
-     * @param string $cmdAddData
+     * @param Array $cmdData
      * @return boolean
      */
-    public function updateAction($cmdAddData = NULL) {
-        $cmdEditData = $this->request->getArguments();
-        $this->commandRepository->update($cmdEditData);
+    public function updateAction($cmdData) {
+        $this->commandRepository->update($cmdData);
         return 'true';
     }
 }

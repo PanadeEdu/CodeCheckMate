@@ -25,24 +25,27 @@ codeCheckMateApp.controller('CheckController', function ($scope, $http) {
     };
 
     $scope.cleanData = function () {
-        $scope.PresetList = {}
+        $scope.PresetList = {};
+        $scope.ExcutionResult = {};
     };
 
     $scope.executePreset = function (presetKey) {
         console.log('execute hm NAOW!');
         console.log(presetKey);
+        $scope.cleanData();
+        $scope.getPresetList();
 
         // Sending Data to Controller
         $http({
             method: 'POST',
             url: 'index.php/PanadeEdu.CodeCheckMate/Check',
-            data: {'executionData': presetKey},
+            data: {'presetKey': presetKey},
             headers: {'Content-Type': 'application/json'}
         }).success(function (response) {
             if (response) {
+                console.log('outputting');
                 console.log(response);
-                $scope.cleanData();
-                $scope.getPresetList();
+                $scope.ExecutionResult = response;
             }
         });
     };

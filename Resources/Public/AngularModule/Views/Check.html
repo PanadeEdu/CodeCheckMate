@@ -41,6 +41,20 @@
                 </tbody>
             </table>
 
+            <h1>Results</h1>
+            <div>
+
+                <div ng-repeat="singleResult in ExecutionResult track by $index">
+                    <h3>Resuts of "{{singleResult.Name}}" ({{singleResult.Shortname}})</h3>
+                    <h4>Exit Code: {{singleResult.ExitCode}}</h4>
+                    <pre class="pre-scrollable">
+                        <code>
+                            <span style="display:block; padding-bottom:5px;" ng-repeat="outputLine in singleResult.Output track by $index">{{outputLine}}</span>
+                        </code>
+                    </pre>
+                </div>
+
+            </div>
 
         </div>
     </div>
